@@ -1,0 +1,7 @@
+# Your Discord bot token, obtained from the Discord Developer Portal.
+# Keep this secret!
+discord_token: "YOUR_DISCORD_BOT_TOKEN_HERE"
+
+# The prefix that the bot will listen for.
+# Default is "!" if this is not specified.
+command_prefix: "!"
