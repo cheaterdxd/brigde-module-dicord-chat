@@ -138,7 +138,6 @@ class SmartMessage:
             ... )
         """
         try:
-            import os
             from pathlib import Path
             
             if file_path and not Path(file_path).exists():

@@ -97,7 +97,6 @@ class Bridge:
         from .exceptions import ReconnectExhaustedError
         
         attempt = 0
-        last_error = None
         
         while True:
             try:
