@@ -15,5 +15,5 @@ from .middleware import (
     logging_middleware as logging_middleware,
     rate_limit_middleware as rate_limit_middleware,
     dm_only_middleware as dm_only_middleware,
-    admin_only_middleware as admin_only_middleware
+    admin_only_middleware as admin_only_middleware,
 )
