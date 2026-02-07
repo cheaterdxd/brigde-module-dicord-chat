@@ -11,6 +11,22 @@ from .logger import get_logger
 logger = get_logger(__name__)
 
 
+class BridgeClient(discord.Client):
+    """Custom Discord client that bridges to the Bridge class."""
+
+    def __init__(self, bridge: "Bridge", *args, **kwargs):
+        self._bridge = bridge
+        super().__init__(*args, **kwargs)
+
+    async def on_ready(self):
+        """Called when the bot is ready."""
+        await self._bridge._handle_on_ready()
+
+    async def on_message(self, message: discord.Message):
+        """Called when a message is received."""
+        await self._bridge._handle_on_message(message)
+
+
 class Bridge:
     """Main bridge class for connecting to Discord and handling messages.
 
@@ -57,15 +73,13 @@ class Bridge:
         self._ready_event = asyncio.Event()
         self._incoming_queue: asyncio.Queue[SmartMessage] = asyncio.Queue()
         self._shutdown_event = asyncio.Event()
-        self._client: discord.Client | None = None
+        self._client: BridgeClient | None = None
 
-        # Setup Discord client and event handlers
+        # Setup Discord client
         intents = discord.Intents.default()
         intents.messages = True
         intents.message_content = True
-        self._client = discord.Client(intents=intents)
-        self._client.event(self._handle_on_ready)
-        self._client.event(self._handle_on_message)
+        self._client = BridgeClient(self, intents=intents)
 
     async def run(self) -> None:
         """Start the bot and connect to Discord with automatic reconnection.
@@ -199,9 +213,7 @@ class Bridge:
         while not self._shutdown_event.is_set():
             try:
                 # Wait for message with timeout to check shutdown periodically
-                message = await asyncio.wait_for(
-                    self._incoming_queue.get(), timeout=1.0
-                )
+                message = await asyncio.wait_for(self._incoming_queue.get(), timeout=1.0)
                 yield message
             except asyncio.TimeoutError:
                 # Check shutdown flag and continue
@@ -239,9 +251,7 @@ class Bridge:
 
         # 3. Check channel whitelist if configured
         if self.allowed_channels and message.channel.id not in self.allowed_channels:
-            logger.debug(
-                f"Ignoring message from non-whitelisted channel: {message.channel.id}"
-            )
+            logger.debug(f"Ignoring message from non-whitelisted channel: {message.channel.id}")
             return
 
         # If filters pass, create a SmartMessage and put it in the queue
