@@ -5,3 +5,19 @@ discord_token: "YOUR_DISCORD_BOT_TOKEN_HERE"
 # The prefix that the bot will listen for.
 # Default is "!" if this is not specified.
 command_prefix: "!"
+
+# Whitelist of channel IDs where the bot is allowed to respond.
+# Leave empty to allow all channels.
+# Example:
+# allowed_channel_ids:
+#   - "123456789012345678"
+#   - "987654321098765432"
+allowed_channel_ids: []
+
+# Maximum reconnection attempts when Discord connection drops.
+# Default: 5
+max_reconnect_attempts: 5
+
+# Base delay in seconds for exponential backoff during reconnection.
+# Default: 1.0 (will try: 1s, 2s, 4s, 8s, 16s...)
+reconnect_base_delay: 1.0

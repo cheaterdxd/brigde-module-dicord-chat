@@ -1,0 +1,96 @@
+site_name: Discord Bridge Documentation
+site_description: A simple, reliable Python library to bridge your application with Discord
+site_author: Your Name
+copyright: Copyright 2026
+
+repo_url: https://github.com/yourusername/discord-bridge-module
+repo_name: discord-bridge-module
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Configuration: getting-started/configuration.md
+    - Quick Start: getting-started/quickstart.md
+  - User Guide:
+    - Basic Usage: user-guide/basic-usage.md
+    - Command Router: user-guide/command-router.md
+    - Middleware: user-guide/middleware.md
+    - Replies & Embeds: user-guide/replies-embeds.md
+    - File Attachments: user-guide/attachments.md
+  - API Reference:
+    - Bridge: api-reference/bridge.md
+    - SmartMessage: api-reference/smartmessage.md
+    - CommandRouter: api-reference/commandrouter.md
+    - Exceptions: api-reference/exceptions.md
+    - Configuration: api-reference/configuration.md
+    - Middleware: api-reference/middleware.md
+  - Examples:
+    - Basic Bot: examples/basic-bot.md
+    - Command Router: examples/command-router.md
+    - Embeds: examples/embeds.md
+    - File Attachments: examples/attachments.md
+    - DM Handler: examples/dm-handler.md
+
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [discord_bridge]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_if_no_docstring: false
+            filters:
+              - "!^_"
+          import:
+            - https://docs.python.org/3/objects.inv
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/discord-bridge-module
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
