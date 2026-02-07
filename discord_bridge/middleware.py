@@ -1,5 +1,5 @@
 """Middleware system for extending Discord Bridge functionality."""
-from typing import Callable, Awaitable, Optional, List
+from typing import Callable, Awaitable, List
 from dataclasses import dataclass
 
 from .message import SmartMessage

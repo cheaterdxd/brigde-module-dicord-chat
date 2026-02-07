@@ -120,7 +120,6 @@ class Bridge:
                 # Don't retry on login failure - it's a config issue
                 raise
             except Exception as e:
-                last_error = e
                 attempt += 1
                 
                 if attempt >= self.max_reconnect_attempts:

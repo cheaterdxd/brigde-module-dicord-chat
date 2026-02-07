@@ -1,6 +1,12 @@
-from .bridge import Bridge
-from .message import SmartMessage
-from .exceptions import *
+from .bridge import Bridge as Bridge
+from .message import SmartMessage as SmartMessage
+from .exceptions import (
+    BridgeException,
+    ConfigurationError,
+    ConnectionError,
+    MessageSendError,
+    ReconnectExhaustedError,
+)
 from .logger import setup_logging, get_logger
 from .router import CommandRouter
 from .middleware import (

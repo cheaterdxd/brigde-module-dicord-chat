@@ -1,6 +1,6 @@
 """Command router for Discord Bridge with decorator-based registration."""
 from typing import Callable, Awaitable, Optional
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from .message import SmartMessage
 from .logger import get_logger
